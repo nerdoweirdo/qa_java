@@ -8,25 +8,26 @@ import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
 public class LionManeParamTest {
-    private final String sex;
-    private final Boolean expectedMane;
+    private String sex;
+    private boolean expectedHasMane;
 
-    public LionManeParamTest(String sex, Boolean expectedMane) {
+    public LionParamTest(String sex, boolean expectedHasMane) {
         this.sex = sex;
-        this.expectedMane = expectedMane;
+        this.expectedHasMane = expectedHasMane;
     }
 
-    @Parameterized.Parameters
-    public static Object[][] shouldHaveMane() {
-        return new Object[][]{
-                {"Самец", Boolean.TRUE},
-                {"Самка", Boolean.FALSE},
-        };
+    @Parameters
+    public static Collection<Object[]> testData() {
+        return Arrays.asList(new Object[][]
+                {
+                        {"Самец", true},
+                        {"Самка", false},
+                });
     }
 
     @Test
-    public void lionHaveMane() throws Exception {
-        Lion lion = new Lion(sex, new Feline());
-        Assert.assertEquals(expectedMane, lion.doesHaveMane());
+    public void testLionSex() throws Exception {
+        Lion lion = new Lion(sex);
+        assertEquals(expectedHasMane, lion.doesHaveMane());
     }
 }
