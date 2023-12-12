@@ -1,8 +1,6 @@
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import com.example.Feline;
 import com.example.Lion;
 import org.junit.Before;
 import org.junit.Rule;
@@ -10,7 +8,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
@@ -45,7 +42,7 @@ public class LionTest {
     @Test
     public void testEatMeat() throws Exception {
         Lion lion = new Lion("Самец");
-        List<String> foodList = lion.eatMeat();
+        List<String> foodList = lion.getFood();
         assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), foodList);
     }
 

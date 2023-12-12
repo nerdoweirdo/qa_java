@@ -1,4 +1,7 @@
 package com.example;
 
-public class AnimalActions {
+import java.util.List;
+
+public interface AnimalActions {
+    int getKittens();
 }
