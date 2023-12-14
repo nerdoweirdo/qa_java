@@ -17,4 +17,6 @@ public class Animal {
     public String getFamily() {
         return "Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи";
     }
+
+    public abstract List<String> eatMeat() throws Exception;
 }
