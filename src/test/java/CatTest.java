@@ -1,41 +1,30 @@
 import com.example.Cat;
 import com.example.Feline;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
-
-@RunWith(MockitoJUnitRunner.class)
 public class CatTest {
-
-    @Mock
-    Feline felineMock;
+    private Feline felineMock;
+    private Cat cat;
 
     @Before
     public void setUp() {
-        initMocks(this);
+        felineMock = mock(Feline.class);
+        cat = new Cat(felineMock);
     }
-
     @Test
-    public void testGetSound() {
-        Cat cat = new Cat(felineMock);
-        String result = cat.getSound();
-        assertEquals("Мяу", result);
+    public void getSoundCat() {
+        assertEquals("Мяу", cat.getSound());
     }
-
     @Test
-    public void testGetFood() throws Exception {
-        Cat cat = new Cat(felineMock);
-        when(felineMock.eatMeat()).thenReturn(Arrays.asList("Хищник"));
-        List<String> result = cat.getFood();
-        assertEquals(Arrays.asList("Хищник"), result);
+    public void getFoodCat() throws Exception {
+        when(felineMock.eatMeat()).thenReturn(List.of("Еда для котика"));
+        assertEquals(List.of("Еда для котика"), cat.getFood());
     }
 }

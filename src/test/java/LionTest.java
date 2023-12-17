@@ -1,49 +1,32 @@
-import static org.junit.Assert.assertEquals;
-import static org.mockito.MockitoAnnotations.initMocks;
-
+import com.example.Feline;
 import com.example.Lion;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.List;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.junit.Assert.assertEquals;
 public class LionTest {
-    @Mock
-    Lion animalLion;
+    Feline feline = new Feline();
 
-    @Before
-    public void setUp() {
-        initMocks(this);
+    @Test
+    public void getKittensLionOne() throws Exception {
+        Lion lion = new Lion("Самец", feline);
+        assertEquals(1, lion.getKittens());
     }
 
     @Test
-    public void testGetKittens() throws Exception {
-        Lion lion = new Lion("Самец");
-        int result = lion.getKittens();
-        assertEquals(1, result);
-    }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-    @Test
-    public void testLionSexInvalid() throws Exception {
-        thrown.expect(Exception.class);
-        thrown.expectMessage("Используйте допустимые значения пола животного - Самец или Самка");
-        new Lion("InvalidSex");
+    public void getLionFoodList() throws Exception {
+        Lion lion = new Lion("Самец", feline);
+        Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
     }
 
     @Test
-    public void testEatMeat() throws Exception {
-        Lion lion = new Lion("Самец");
-        List<String> foodList = lion.getFood();
-        assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), foodList);
+    public void otherSexException() {
+        String expectedString = "Используйте допустимые значения пола животного - самец или самка";
+        Exception exception = Assert.assertThrows(Exception.class, () -> new Lion("Неизвестный пол", feline));
+        Assert.assertEquals(expectedString, exception.getMessage());
     }
 
 }
